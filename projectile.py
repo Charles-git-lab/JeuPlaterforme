@@ -32,9 +32,11 @@ class Projectile(pygame.sprite.Sprite):
         self.rotate()
 
         #Verifier si le projectile touche un monstre
-        if self.player.game.check_collision(self, self.player.game.all_monster):
+        for monster in self.player.game.check_collision(self, self.player.game.all_monster):
             #suppression du projectile après avoir toucher le monstre
             self.remove()
+            #Infliger les dégats selon les points d'attaques du joueur
+            monster.damage(self.player.attack)
 
 
         #verifier si le projectile n'est plus présent sur l'écran
