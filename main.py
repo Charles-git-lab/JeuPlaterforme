@@ -27,6 +27,15 @@ while running:
 
     #Appliquer image joueur
     screen.blit(game.player.image, game.player.rect)
+
+    #Verifier si le joueur veut aller a gauche ou droite + délimitation des bordures
+    if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < screen.get_width():
+        game.player.move_right()
+    elif game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
+        game.player.move_left()
+
+    print(game.player.rect.x)
+
     #Mettre a jour l'écran
     pygame.display.flip()
 
@@ -37,3 +46,10 @@ while running:
         if event.type == pygame.QUIT:
             running = False
             pygame.quit()
+
+
+        #Detecter les appuis de touche
+        elif event.type == pygame.KEYDOWN:
+            game.pressed[event.key] = True
+        elif event.type == pygame.KEYUP:
+            game.pressed[event.key] = False
