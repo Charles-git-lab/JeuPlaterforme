@@ -10,12 +10,23 @@ class Player(pygame.sprite.Sprite):
         self.health = 100
         self.max_health = 100
         self.attack = 10
-        self.velocity = 3
+        self.velocity = 3.5
         self.all_projectiles = pygame.sprite.Group()
         self.image = pygame.image.load('assets/ninja.png')
         self.rect = self.image.get_rect()
         self.rect.x = 200
         self.rect.y = 500
+
+    def damage(self, amount):
+        if self.health - amount > amount:
+            self.health -= amount
+
+
+    
+    def update_health_bar(self, surface):
+        #dessin de la barre de vie
+        pygame.draw.rect(surface, (101, 101, 101), [self.rect.x + 60, self.rect.y - 5, self.max_health, 5])
+        pygame.draw.rect(surface, (88, 243, 30), [self.rect.x + 60, self.rect.y - 5, self.health, 5])
 
     def launch_projectile(self):
         #Nouvelle instance de la classe projectile
