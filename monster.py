@@ -5,7 +5,7 @@ import random
 
 class Monster(pygame.sprite.Sprite):
 
-    def __init__(self, game):
+    def __init__(self, game): 
         super().__init__()
         self.game = game
         self.health = 100
@@ -15,6 +15,10 @@ class Monster(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = 800 + random.randint(50, 300)
         self.rect.y = 540
+        
+
+    def set_speed(self, speed):
+        self.default_speed = speed
         self.velocity = random.randint(2, 3)
 
     def damage(self, amount):
@@ -25,7 +29,7 @@ class Monster(pygame.sprite.Sprite):
         if self.health <= 0:
             # Disparition et réaparition du monstre après sa mort
             self.rect.x = 800 + random.randint(50, 300)
-            self.velocity = random.randint(2, 3)
+            self.velocity = random.randint(2, self.default_speed)
             self.health = self.max_health
 
     def update_health_bar(self, surface):

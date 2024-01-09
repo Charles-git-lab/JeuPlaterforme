@@ -5,6 +5,10 @@ from player import Player
 
 pygame.init()
 
+#Defini la clock
+clock = pygame.time.Clock()
+FPS = 144
+
 
 #Création de la fenetre
 pygame.display.set_caption("Test de jeu de plateforme")
@@ -75,3 +79,5 @@ while running:
             if play_button_rect.collidepoint(event.pos):
                 #Le jeu se lance
                 game.start()
+    #Fixe le nombre de fps sur la clock
+    clock.tick(FPS)
